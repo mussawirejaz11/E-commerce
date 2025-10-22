@@ -1,0 +1,26 @@
+[
+  {
+    "id":1,
+    "title":"Classic Tee",
+    "price":19.99,
+    "description":"Comfortable classic tee.",
+    "category":"clothing",
+    "image":"https://via.placeholder.com/300x300?text=Classic+Tee"
+  },
+  {
+    "id":2,
+    "title":"Running Shoes",
+    "price":79.99,
+    "description":"Lightweight running shoes.",
+    "category":"shoes",
+    "image":"https://via.placeholder.com/300x300?text=Shoes"
+  },
+  {
+    "id":3,
+    "title":"Wireless Headphones",
+    "price":129.99,
+    "description":"Noise cancelling headphones.",
+    "category":"electronics",
+    "image":"https://via.placeholder.com/300x300?text=Headphones"
+  }
+]
