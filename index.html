@@ -20,17 +20,23 @@
   </div>
 
   <div class="controls">
-    <label>
-      Sort:
-      <select id="sortSelect">
-        <option value="default">Default</option>
-        <option value="price-asc">Price: Low → High</option>
-        <option value="price-desc">Price: High → Low</option>
-        <option value="title-asc">Title A → Z</option>
-        <option value="title-desc">Title Z → A</option>
-      </select>
-    </label>
-    <button id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
+   <div class="sort-container">
+  <button id="sortBtn">Sort <i class="bi bi-filter"></i></button>
+  <select id="sortSelect">
+    <option value="default">Default</option>
+    <option value="price-asc">Price: Low → High</option>
+    <option value="price-desc">Price: High → Low</option>
+    <option value="title-asc">Title A → Z</option>
+    <option value="title-desc">Title Z → A</option>
+  </select>
+
+</div>
+    <div id="userArea" class="user-area">
+    <!-- JS will render login / username / logout here -->
+    <a id="loginLink" href="auth.html" class="small-btn">Login</a>
+</div>
+
+  <button id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
   </div>
 </header>
 
