@@ -14,7 +14,11 @@ body{
   color:var(--text);
   line-height:1.4;
 }
-a{color:inherit; text-decoration:none}
+
+a{
+color:inherit; 
+text-decoration:none;
+}
 
 .site-header{
   display:flex;
@@ -24,8 +28,16 @@ a{color:inherit; text-decoration:none}
   background:var(--card);
   border-bottom:1px solid #e6e6e6;
 }
-.site-header h1{margin:0; font-size:20px}
-.controls {display:flex; gap:12px; align-items:center}
+.site-header h1{
+margin:0; 
+font-size:20px;
+}
+.controls {
+  display:flex; 
+  gap:12px;
+  align-items:center
+  
+}
 
 .product-grid{
   display:grid;
@@ -44,10 +56,24 @@ a{color:inherit; text-decoration:none}
   flex-direction:column;
   gap:8px;
 }
-.card img{height:160px; object-fit:contain; width:100%}
-.card h3{font-size:14px; margin:0; min-height:36px}
-.card .price{font-weight:700}
-.card .actions{margin-top:auto; display:flex; gap:8px}
+.card img{
+height:160px; 
+object-fit:contain; 
+width:100%;
+}
+.card h3{
+font-size:14px; 
+margin:0; 
+min-height:36px;
+}
+.card .price{
+font-weight:700;
+}
+.card .actions{
+margin-top:auto; 
+display:flex; 
+gap:8px;
+}
 
 .product-detail{
   max-width:1000px;
@@ -59,7 +85,11 @@ a{color:inherit; text-decoration:none}
   grid-template-columns: 1fr 1fr;
   gap:20px;
 }
-.product-detail img{width:100%; height:400px; object-fit:contain}
+.product-detail img{
+width:100%; 
+height:400px; 
+object-fit:contain;
+}
 
 .cart-modal{
   position:fixed;
@@ -87,7 +117,10 @@ a{color:inherit; text-decoration:none}
 }
 
 
-.cart-modal.hidden{display:none}
+.cart-modal.hidden{
+display:none
+}
+
 .cart-content{
   width:420px;
   max-height:80vh;
@@ -97,15 +130,41 @@ a{color:inherit; text-decoration:none}
   border-radius:8px;
   position:relative;
 }
-.close-btn{position:absolute; right:8px; top:8px; background:none;border:none;font-size:20px}
-.cart-item{display:flex; gap:10px; align-items:center; padding:8px 0; border-bottom:1px solid #eee}
-.cart-item img{width:60px; height:60px; object-fit:contain}
-.qty-controls{display:flex; gap:6px; align-items:center}
-.cart-footer{display:flex; justify-content:space-between; align-items:center; margin-top:12px}
+.close-btn{
+position:absolute;
+right:8px; 
+top:8px; 
+background:none;
+border:none;
+font-size:20px
+}
+.cart-item{
+display:flex; 
+gap:10px; 
+align-items:center; 
+padding:8px 0; 
+border-bottom:1px solid #eee ;
+}
+.cart-item img{
+width:60px; 
+height:60px; 
+object-fit:contain;
+}
+.qty-controls{
+display:flex; 
+gap:6px; 
+align-items:center;
+}
+.cart-footer{
+display:flex; 
+justify-content:space-between; 
+align-items:center; 
+margin-top:12px;
+}
 
-
-.hidden{display:none}
-
+.hidden{
+display:none;
+}
 
 .small-btn {
   /* rgb(128, 128, 255) */
@@ -123,6 +182,44 @@ a{color:inherit; text-decoration:none}
   border-color: rgb(53, 182, 237);
   color: black; /* stays black */
 }
+
+/* --- user logout buttons --- */
+.user-info {
+  background-color: rgb(118, 198, 232);
+  border: 2px solid rgb(118, 198, 232);
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 15px;
+  cursor: pointer;
+  /* transition: background-color 0.3s ease, transform 0.2s ease; */
+}
+
+.user-info:hover {
+  border: 2px solid rgb(53, 182, 237);
+  background-color: transparent;
+  color: black;
+}
+/* */
+
+/* login styling */
+.user-login{
+  background-color: rgb(118, 198, 232);
+  border: 2px solid rgb(118, 198, 232);
+  color: #fff;
+  border-radius: 6px;
+  padding: 4.12px 14px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.user-login:hover{
+  border: 2px solid rgb(53, 182, 237);
+  background-color: transparent;
+  color: black;
+}
+
+/* */
 
 .addBtn {
   border: 2px solid rgb(118, 198, 232);
@@ -306,3 +403,91 @@ a{color:inherit; text-decoration:none}
   border-color: rgb(53, 182, 237);
 }
 
+
+/* Sorting Button Styling (matches search icon) */
+.sort-container{
+  position: relative;
+  display: inline-block;
+  align-items: center;
+}
+
+
+#sortBtn {
+  border: 2px solid rgb(118, 198, 232);
+  background-color: rgb(118, 198, 232);
+  color: white;
+  border-radius: 6px;
+  padding: 6.15px 12px;
+  font-weight: 450;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#sortBtn:hover {
+  background-color: transparent ;
+  border-color: rgb(53, 182, 237);
+  color: black;
+}
+
+
+/* position dropdown to the left of the button, vertically centered */
+#sortSelect {
+  position: absolute;
+  top: 50%;                       /* vertically center relative to button */
+  right: calc(100% + 8px);        /* place the dropdown immediately left of the button with 8px gap */
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: right center; /* expand from the right edge toward left */
+  opacity: 0;
+  border: 2px solid rgb(118, 198, 232);
+  border-radius: 6px;
+  background-color: white; 
+  padding: 6px 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  z-index: 500;                    /* high enough to overlay other header items */
+  white-space: nowrap;             /* keep options on one line */
+}
+
+/* When visible — expand horizontally from the right toward the left */
+#sortSelect.show {
+  opacity: 1;
+  transform: translateY(-50%) scaleX(1);
+  
+}
+
+
+/* small responsive tweak: if very narrow screens, let the dropdown appear below instead */
+@media (max-width: 480px) {
+  #sortSelect {
+    right: 0;
+    left: 0;
+    top: calc(100% + 8px);
+    transform: translateY(0) scaleY(0);
+    transform-origin: top center;
+    display: block;
+    width: max-content;
+  }
+  #sortSelect.show { transform: translateY(0) scaleY(1); }
+}
+
+.user-greeting {
+  background-color: rgb(118, 198, 232);
+  border: 2px solid rgb(118, 198, 232); /* same as other buttons */
+  color: white;
+  border-radius: 6px;
+  padding: 5.27px 20px;  
+  font-weight: 500;
+  font-size: 12.5px; 
+  transition: all 0.3s ease;
+  cursor: default;  /*ensures it’s not clickable */
+}
+
+/* optional: same hover animation but no pointer */
+.user-greeting:hover {
+  background-color: transparent;
+  border-color: rgb(53, 182, 237);
+  color: black;
+  transform: scale(1.05);
+}
