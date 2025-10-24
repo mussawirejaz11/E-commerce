@@ -61,7 +61,7 @@ function sortProducts(mode){
   if(mode === 'price-asc') sorted.sort((a,b)=>a.price-b.price);
   else if(mode === 'price-desc') sorted.sort((a,b)=>b.price-a.price);
   else if(mode === 'title-asc') sorted.sort((a,b)=>a.title.localeCompare(b.title));
-  else if(mode === 'title-desc') sorted.sort((a,b)=>b.title.localeCompare(a.title)).reverse();
+  else if(mode === 'title-desc') sorted.sort((a,b)=>b.title.localeCompare(a.title));
   renderProducts(sorted);
 }
 
@@ -231,9 +231,140 @@ function showToast(message) {
     if(clearCartBtn) clearCartBtn.addEventListener('click', clearCart);
     if(checkoutBtn) checkoutBtn.addEventListener('click', generateInvoice);
     cartCountEl.textContent = cart.reduce((s,i)=>s+i.qty,0);
-    updateCartUI();
-  } catch(err) {
-    productsEl.innerHTML = '<p>Unable to load products. Try again later.</p>';
-    console.error(err);
+updateCartUI();
+
+/* --- Search Feature --- */
+const searchIcon = document.getElementById('searchIcon');
+const searchInput = document.getElementById('searchInput');
+const suggestionsList = document.getElementById('suggestions');
+let collapseTimer;
+
+searchIcon.addEventListener('click', () => {
+  searchInput.classList.add('expanded');
+  searchInput.focus();
+
+  // auto collapse after 10s if no typing
+  clearTimeout(collapseTimer);
+  collapseTimer = setTimeout(() => {
+    if (searchInput.value.trim() === '') {
+      searchInput.classList.remove('expanded');
+      suggestionsList.classList.add('hidden');
+    }
+  }, 10000);
+});
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase().trim();
+  if (!query) {
+    suggestionsList.classList.add('hidden');
+    suggestionsList.innerHTML = '';
+    return;
   }
+
+  const filtered = products.filter(p =>
+    p.title.toLowerCase().includes(query)
+  ).slice(0, 5); // limit 5 suggestions
+
+  if (filtered.length === 0) {
+    suggestionsList.classList.add('hidden');
+    suggestionsList.innerHTML = '';
+    return;
+  }
+
+  suggestionsList.innerHTML = filtered
+  .map(p => `
+    <li data-id="${p.id}">
+      <img src="${p.image}" alt="${p.title}" class="suggestion-img">
+      <span>${p.title}</span>
+    </li>
+  `)
+  .join('');
+
+  suggestionsList.classList.remove('hidden');
+});
+
+//Keyboard navigations
+let currentFocus = -1;
+
+searchInput.addEventListener('keydown', (e) => {
+  const items = suggestionsList.querySelectorAll('li');
+  if (!items.length) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    currentFocus = (currentFocus + 1) % items.length;
+    setActive(items);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    currentFocus = (currentFocus - 1 + items.length) % items.length;
+    setActive(items);
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (currentFocus > -1) {
+      items[currentFocus].click();
+    }
+  }
+});
+
+function setActive(items) {
+  items.forEach(i => i.classList.remove('active-suggestion'));
+  if (currentFocus >= 0 && currentFocus < items.length) {
+    items[currentFocus].classList.add('active-suggestion');
+    items[currentFocus].scrollIntoView({ block: 'nearest' });
+  }
+}
+
+
+
+suggestionsList.addEventListener('click', e => {
+  const item = e.target.closest('li');
+  if (item) {
+    const id = parseInt(item.getAttribute('data-id'));
+    filterAndShowProduct(id);
+  }
+});
+
+
+
+// collapse bar when clicked outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-container') && !e.target.closest('#searchIcon')) {
+    searchInput.classList.remove('expanded');
+    suggestionsList.classList.add('hidden');
+  }
+});
+
+function filterAndShowProduct(id) {
+  const selectedProduct = products.find(p => p.id === id);
+  if (!selectedProduct) return;
+
+  // hide suggestions + collapse search
+  suggestionsList.classList.add('hidden');
+  searchInput.classList.remove('expanded');
+  searchInput.value = '';
+
+  // render only that product
+  renderProducts([selectedProduct]);
+
+  // show a small reset button to go back to full list
+  let resetBtn = document.getElementById('resetSearch');
+  if (!resetBtn) {
+    resetBtn = document.createElement('button');
+    resetBtn.id = 'resetSearch';
+    resetBtn.textContent = 'Show All Products';
+    resetBtn.className = 'reset-btn';
+
+    resetBtn.addEventListener('click', () => {
+      renderProducts(products);
+      resetBtn.remove();
+    });
+    productsEl.insertAdjacentElement('beforebegin', resetBtn);
+  }
+}
+
+} catch(err) {
+  productsEl.innerHTML = '<p>Unable to load products. Try again later.</p>';
+  console.error(err);
+}
+
 })();
