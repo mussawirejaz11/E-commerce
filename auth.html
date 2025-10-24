@@ -25,8 +25,12 @@
           <input type="email" id="loginEmail" required />
         </label>
         <label>Password
-          <input type="password" id="loginPass" required minlength="6" />
+           <div class="password-field">
+            <input type="password" id="loginPass" required minlength="6" />
+            <i class="bi bi-eye-slash toggle-pass" data-target="loginPass"></i>
+           </div>
         </label>
+
         <div class="form-actions">
           <button type="submit" class="reset-btn">Login</button>
           <a href="index.html" class="cancel-link">Back to store</a>
@@ -42,10 +46,17 @@
           <input type="email" id="signupEmail" required />
         </label>
         <label>Password
-          <input type="password" id="signupPass" required minlength="6" />
+          <div class="password-field">
+            <input type="password" id="loginPass" required minlength="6" />
+            <i class="bi bi-eye-slash toggle-pass" data-target="loginPass"></i>
+          </div>
         </label>
+
         <label>Confirm password
-          <input type="password" id="signupPass2" required minlength="6" />
+          <div class="password-field">
+            <input type="password" id="signupPass2" required minlength="6" />
+            <i class="bi bi-eye-slash toggle-pass" data-target="signupPass2"></i>
+          </div>
         </label>
         <div class="form-actions">
           <button type="submit" class="reset-btn">Create account</button>
