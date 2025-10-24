@@ -4,7 +4,23 @@ const FALLBACK = 'products.json'; // optional local fallback file in your folder
 
 // DOM refs
 const productsEl = document.getElementById('products');
+
+/* --- Sort Toggle Button --- */
+const sortBtn = document.getElementById('sortBtn');
 const sortSelect = document.getElementById('sortSelect');
+
+sortBtn.addEventListener('click', () => {
+  sortSelect.classList.toggle('show');
+});
+
+// Close when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.sort-container')) {
+    sortSelect.classList.remove('show');
+  }
+});
+
+
 const cartBtn = document.getElementById('cartBtn');
 const cartCountEl = document.getElementById('cartCount');
 const cartModal = document.getElementById('cartModal');
@@ -219,7 +235,6 @@ function showToast(message) {
   }, 2000);
 }
 
-
 /* Init */
 (async function init(){
   try {
@@ -232,6 +247,55 @@ function showToast(message) {
     if(checkoutBtn) checkoutBtn.addEventListener('click', generateInvoice);
     cartCountEl.textContent = cart.reduce((s,i)=>s+i.qty,0);
 updateCartUI();
+
+// --- user area handling (show login / username / logout)
+const userArea = document.getElementById('userArea');
+
+function getCurrentUser() {
+  try { return JSON.parse(localStorage.getItem('current_user')); } catch(e){ return null; }
+}
+
+function renderUserArea() {
+  if (!userArea) return;
+  const cur = getCurrentUser();
+  userArea.innerHTML = '';
+  if (cur && cur.name) {
+    // show name + logout
+    const span = document.createElement('span');
+    span.textContent = `Hi, ${cur.name.split(' ')[0]}`;
+    //Styling for "Hi,username"
+    span.className = 'user-greeting';
+    span.style.marginRight = '8px';
+
+    const logoutBtn = document.createElement('button');
+    logoutBtn.className = 'user-info';
+    logoutBtn.textContent = 'Logout';
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('current_user');
+      renderUserArea();
+      // optionally refresh to show features restricted to logged-in users
+      location.reload();
+    });
+
+    userArea.appendChild(span);
+    userArea.appendChild(logoutBtn);
+  } else {
+    // show login link
+    const a = document.createElement('a');
+    a.id = 'loginLink';
+    a.href = 'auth.html';
+    a.className = 'user-login';
+    a.textContent = 'Login';
+    userArea.appendChild(a);
+  }
+}
+
+//Ensures header updates showing either
+//"Login" or "Hi, Name + Logout" on page load.
+renderUserArea();
+
+///
+
 
 /* --- Search Feature --- */
 const searchIcon = document.getElementById('searchIcon');
@@ -310,10 +374,9 @@ function setActive(items) {
   items.forEach(i => i.classList.remove('active-suggestion'));
   if (currentFocus >= 0 && currentFocus < items.length) {
     items[currentFocus].classList.add('active-suggestion');
-    items[currentFocus].scrollIntoView({ block: 'nearest' });
+    items[currentFocus].scrollIntoView({ block: "nearest" });
   }
 }
-
 
 
 suggestionsList.addEventListener('click', e => {
@@ -323,8 +386,6 @@ suggestionsList.addEventListener('click', e => {
     filterAndShowProduct(id);
   }
 });
-
-
 
 // collapse bar when clicked outside
 document.addEventListener('click', e => {
