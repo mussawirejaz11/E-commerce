@@ -119,4 +119,22 @@ loginForm.addEventListener('submit', async (e) => {
       // window.location.href = 'index.html';
     }
   } catch(e){}
+
+  /* Password visibility Eye toggle */
+document.querySelectorAll('.toggle-pass').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const input = document.getElementById(icon.dataset.target);
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.remove('bi-eye-slash');
+      icon.classList.add('bi-eye');
+    } else {
+      input.type = 'password';
+      icon.classList.remove('bi-eye');
+      icon.classList.add('bi-eye-slash');
+    }
+  });
+});
+
+
 })();
