@@ -71,6 +71,34 @@ body,html{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;back
 }
 .auth-form input:focus{border-color:var(--auth-accent)}
 
+/* password visibility Eye icon */
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  flex: 1;
+  padding-right: 36px; /* space for icon */
+}
+
+.toggle-pass {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000000;
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.toggle-pass:hover {
+  color: rgb(181, 181, 181);
+}
+/*  */
+
 .form-actions{
   display:flex;
   gap:8px;
