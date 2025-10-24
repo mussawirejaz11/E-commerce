@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign in / Sign up — My Store</title>
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="styles.css" /> <!-- include base styles for button consistency -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+  <div class="auth-bg">
+    <!-- background image is set via CSS -->
+    <div class="auth-overlay"></div>
+    <div class="auth-card" role="main" aria-labelledby="authTitle">
+      <h2 id="authTitle">Welcome</h2>
+
+      <div class="tabs">
+        <button id="tab-login" class="tab active">Login</button>
+        <button id="tab-signup" class="tab">Sign up</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>Email
+          <input type="email" id="loginEmail" required />
+        </label>
+        <label>Password
+          <input type="password" id="loginPass" required minlength="6" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="reset-btn">Login</button>
+          <a href="index.html" class="cancel-link">Back to store</a>
+        </div>
+        <div id="loginMsg" class="auth-msg"></div>
+      </form>
+
+      <form id="signupForm" class="auth-form hidden">
+        <label>Full name
+          <input type="text" id="signupName" required />
+        </label>
+        <label>Email
+          <input type="email" id="signupEmail" required />
+        </label>
+        <label>Password
+          <input type="password" id="signupPass" required minlength="6" />
+        </label>
+        <label>Confirm password
+          <input type="password" id="signupPass2" required minlength="6" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="reset-btn">Create account</button>
+          <a href="index.html" class="cancel-link">Back to store</a>
+        </div>
+        <div id="signupMsg" class="auth-msg"></div>
+      </form>
+
+      <div class="small-note">Accounts stored locally in your browser (dev/demo only).</div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

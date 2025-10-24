@@ -1,0 +1,107 @@
+/* auth.css - visual for login/signup page */
+:root{
+  --auth-card-bg: #fff;
+  --auth-accent: rgb(118,198,232);
+}
+
+*{box-sizing:border-box}
+body,html{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:#111;color:#222}
+
+.auth-bg{
+  position:relative;
+  height:100vh;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background-image: url('https://images.unsplash.com/photo-1542831371-d531d36971e6?q=80&w=1400&auto=format&fit=crop&sat=-20');
+  background-size:cover;
+  background-position:center;
+}
+
+/* soft overlay + blur */
+.auth-overlay{
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(6px) saturate(0.9);
+  background: rgba(255,255,255,0.12);
+}
+
+/* centered card */
+.auth-card{
+  position:relative;
+  z-index:5;
+  width: 360px;
+  max-width: calc(100% - 32px);
+  background: var(--auth-card-bg);
+  border-radius: 12px;
+  padding: 20px 20px 18px;
+  box-shadow: 0 10px 30px rgba(10,10,10,0.18);
+  text-align:left;
+}
+
+.auth-card h2{margin:0 0 12px;font-size:20px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tab{
+  flex:1;
+  padding:8px 10px;
+  border-radius:8px;
+  border: 2px solid transparent;
+  background: transparent;
+  cursor:pointer;
+  transition: all 0.25s ease;
+}
+.tab.active{
+  background: var(--auth-accent);
+  color: white;
+  border-color: rgba(0,0,0,0.04);
+}
+
+.auth-form{display:block}
+.auth-form label{display:block;margin-bottom:10px;font-size:13px;color:var(--muted)}
+.auth-form input{
+  width:100%;
+  padding:8px 10px;
+  border:2px solid rgb(230,230,230);
+  border-radius:8px;
+  outline:none;
+  transition: border-color 0.15s ease;
+  margin-top:6px;
+}
+.auth-form input:focus{border-color:var(--auth-accent)}
+
+.form-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:8px;
+}
+.cancel-link{margin-left:auto;font-size:13px;color:var(--muted);text-decoration:none}
+
+.auth-msg{margin-top:8px;font-size:13px;color:#b00020;min-height:18px}
+
+/* reuse reset-btn style from styles.css or match it */
+.reset-btn{
+  background-color: rgb(118,198,232);
+  color: white;
+  border: 2px solid rgb(118,198,232);
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.reset-btn:hover{
+  background-color: transparent;
+  color: black;
+  border-color: rgb(53,182,237);
+}
+
+/* small note */
+.small-note{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
+
+/* mobile tweak */
+@media (max-width:420px){
+  .auth-card{width:92%}
+  .tabs{gap:6px}
+}
