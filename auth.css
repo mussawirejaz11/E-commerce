@@ -128,8 +128,21 @@ body,html{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;back
 /* small note */
 .small-note{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
 
+/* Disable browser's default Eye password reveal button */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+}
+
+
 /* mobile tweak */
 @media (max-width:420px){
   .auth-card{width:92%}
   .tabs{gap:6px}
 }
+
